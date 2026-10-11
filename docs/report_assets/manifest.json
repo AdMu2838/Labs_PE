@@ -1,0 +1,274 @@
+{
+  "output": "Informe_Laboratorio_4_UNSA_LAB.docx",
+  "figures": 13,
+  "web_screenshots": 12,
+  "source_files": 53,
+  "source_lines": 2583,
+  "sources": [
+    {
+      "file": "lib/app/app.dart",
+      "lines": 62,
+      "sha256": "31278d9e5858a7a2080865663cac876b45b1e85789a5ede48b02d99bc41c120f"
+    },
+    {
+      "file": "lib/app/shell/app_shell.dart",
+      "lines": 70,
+      "sha256": "b6c5f2fa658cda19c44a3098fa20ee5163e6a01ebe4f50c829f78515201ee406"
+    },
+    {
+      "file": "lib/app/theme/app_theme.dart",
+      "lines": 41,
+      "sha256": "06c3b817c79734fd8c5ea8055ea8c014eca1653c23bc45113374b67f73c8fe37"
+    },
+    {
+      "file": "lib/core/config/environment.dart",
+      "lines": 5,
+      "sha256": "f79cf93a48ea33b5d3e18e79ad41c0c0e5c7dc4db19d5af462e1734bd506b6d6"
+    },
+    {
+      "file": "lib/core/data/demo_lab_repository.dart",
+      "lines": 97,
+      "sha256": "ace2e5b5ee2be84fccbf90f8aab6d83ad0079cda68bd59c6ead8053e6c74abd5"
+    },
+    {
+      "file": "lib/core/data/providers.dart",
+      "lines": 29,
+      "sha256": "f7a869196d599c88eb5938eac1001c610142336bd2bd46376f9869209f3af96f"
+    },
+    {
+      "file": "lib/core/data/supabase_lab_repository.dart",
+      "lines": 61,
+      "sha256": "2c00f81c5a9491935c2016aafa7c26df3e0d5ab66a29a116219bd8f62cf2e1bc"
+    },
+    {
+      "file": "lib/core/domain/form_field_spec.dart",
+      "lines": 8,
+      "sha256": "7e60cd199fd1d483eee1145355e4f0738ca1e252f3534d4e1e854df8faf7f426"
+    },
+    {
+      "file": "lib/core/domain/lab_repository.dart",
+      "lines": 15,
+      "sha256": "45de94f160dced04d9e15c776a0ccbab628ae15ece8d4c83f01071ee84e6878e"
+    },
+    {
+      "file": "lib/features/administration/domain/admin_sections.dart",
+      "lines": 33,
+      "sha256": "9e3071cfb258bbfcd93cc9f8a91ef3942a138d7703775bb437726b47114fb774"
+    },
+    {
+      "file": "lib/features/administration/presentation/admin_page.dart",
+      "lines": 57,
+      "sha256": "5319f438b15e510eec6a98158d8115959ff17e7a8469d83b7a295c57e1af5e1c"
+    },
+    {
+      "file": "lib/features/administration/presentation/import_panel.dart",
+      "lines": 56,
+      "sha256": "96a6f394cf2666966b429ba9ac84adc1ce1665c0ed8aabcefc009b0c7f8bf08e"
+    },
+    {
+      "file": "lib/features/administration/presentation/users_panel.dart",
+      "lines": 29,
+      "sha256": "c4d5af9994616e06751f35339b4e58ac17fe2ad3b470a1b29d5eb93ad60784c6"
+    },
+    {
+      "file": "lib/features/auth/data/supabase_auth_repository.dart",
+      "lines": 50,
+      "sha256": "ade4ce243cce65e594c9041a9a6af9bddfd395c727449a2b98c386f0ce81a4a7"
+    },
+    {
+      "file": "lib/features/auth/domain/auth_repository.dart",
+      "lines": 12,
+      "sha256": "8c7b867a831027221a091a1e26815d030b159aef2d0e3ffe08024dbab5eb00b6"
+    },
+    {
+      "file": "lib/features/auth/domain/session.dart",
+      "lines": 15,
+      "sha256": "47f835f205184dc7cb448c0b0f53e64b50f8838754da967c62c40c1a57db89af"
+    },
+    {
+      "file": "lib/features/auth/presentation/auth_controller.dart",
+      "lines": 30,
+      "sha256": "0bd03cef1b9c575bcf350698c81c43fad08515ee53b9b90365630266fd675d20"
+    },
+    {
+      "file": "lib/features/auth/presentation/login_page.dart",
+      "lines": 110,
+      "sha256": "323e59f2652f27e30d39b59996b20c86ffe9bd377b67ac94c72661d76c2e17fa"
+    },
+    {
+      "file": "lib/features/curriculum/presentation/curriculum_page.dart",
+      "lines": 26,
+      "sha256": "a3717d6d03e04b1b7892522b094c022eb5fc2f4f64f37e94e309bd4bcc07c4b0"
+    },
+    {
+      "file": "lib/features/dashboard/presentation/dashboard_page.dart",
+      "lines": 64,
+      "sha256": "4b70006a7c850e4b803d67fe81ae5d6c1ac4db4c4074dc3d7fcfd23e0a07bfc3"
+    },
+    {
+      "file": "lib/features/enrollment/domain/lab_group.dart",
+      "lines": 23,
+      "sha256": "7c9a7bddcf180dfd6706a9625ca4d4828880da2ea0c4fc3a89f4459268f3151f"
+    },
+    {
+      "file": "lib/features/enrollment/presentation/catalog_page.dart",
+      "lines": 64,
+      "sha256": "ffab90dadfbab798d219957867c008bccecbd918a5df54b25b95a751f4075517"
+    },
+    {
+      "file": "lib/features/enrollment/presentation/enrollments_page.dart",
+      "lines": 83,
+      "sha256": "0240fb84aec3258062cfbdf1f39240311fd6785833fd5b4c0fae614ceb4b692f"
+    },
+    {
+      "file": "lib/features/notifications/presentation/notifications_page.dart",
+      "lines": 23,
+      "sha256": "06ffb873f507e180ed399ae6af423122c064d319ca8039baaf534e59f92420d7"
+    },
+    {
+      "file": "lib/features/profiles/presentation/profile_page.dart",
+      "lines": 46,
+      "sha256": "f3cb146c3c900107e4fc4343564ccc28b5c3a81bc77058273baea319c4b6f11e"
+    },
+    {
+      "file": "lib/features/reports/data/document_service.dart",
+      "lines": 25,
+      "sha256": "59674005b606f4e77e37a50527723a395942d2dae9dad7d49a3b7d9363411b3f"
+    },
+    {
+      "file": "lib/features/reports/presentation/reports_page.dart",
+      "lines": 31,
+      "sha256": "4b85ce6bb844d9dab1f6ca054835ec723b114a378a5d12ae3d0bd2f51ff925e5"
+    },
+    {
+      "file": "lib/features/requests/presentation/requests_page.dart",
+      "lines": 50,
+      "sha256": "19e60a0e2c5740d91a99549bc9d9b245120e17b1131209037b5ae2af3cdfcb00"
+    },
+    {
+      "file": "lib/features/schedules/presentation/schedule_page.dart",
+      "lines": 36,
+      "sha256": "95f2440ab917003b3a55b7467895260e96898cd986b20e0feb1275b8148ccccf"
+    },
+    {
+      "file": "lib/main.dart",
+      "lines": 15,
+      "sha256": "acd2226cbdb7d4c446e0c0cb90fda1513710467b3d68928c93323d930a0512c1"
+    },
+    {
+      "file": "lib/shared/responsive/page_body.dart",
+      "lines": 12,
+      "sha256": "f733ba8a8e74b0a8bcda311399c9b9179cb6bea10b70b268a245506bae7ab305"
+    },
+    {
+      "file": "lib/shared/widgets/async_records.dart",
+      "lines": 18,
+      "sha256": "05824c7cd1b97c8472844fb9aca35a5a138fffcf7f5ae10b59af3bff9f1c72e4"
+    },
+    {
+      "file": "lib/shared/widgets/record_form.dart",
+      "lines": 100,
+      "sha256": "06aa1b48c6d6d5a48ac0dad9a0181c7b48334d93991b7c160c4fd82838baba39"
+    },
+    {
+      "file": "lib/shared/widgets/ui.dart",
+      "lines": 67,
+      "sha256": "071a13f596e5b4bf9bc70e9c6988e27bb190e070ea0e819547446fb5933604db"
+    },
+    {
+      "file": "supabase/migrations/001_schema.sql",
+      "lines": 257,
+      "sha256": "3468d9c613f2edbf3dfc6310e3dcade179229d01b261a3b9386a71d30cbccad3"
+    },
+    {
+      "file": "supabase/migrations/002_operations.sql",
+      "lines": 176,
+      "sha256": "abfee4bda694b92f13433edeea82b17e1fea56398783eb2118ea3ce2fdd93899"
+    },
+    {
+      "file": "supabase/migrations/003_curriculum_2025.sql",
+      "lines": 113,
+      "sha256": "2e22b8f515b1b64f01a5f3232929ca341a07a55ef3950d8780e54dc05fdc7ba0"
+    },
+    {
+      "file": "supabase/migrations/004_google_onboarding.sql",
+      "lines": 57,
+      "sha256": "13e0ecb84ac3071241f82343551cb3a3be8e28d1c7469f7779893579a52fb576"
+    },
+    {
+      "file": "test/admin_responsive_test.dart",
+      "lines": 59,
+      "sha256": "9c00c850b8bfd27d08160cb0165e25af8107add86024f7161e64b6a46a4ffb3a"
+    },
+    {
+      "file": "test/auth_test.dart",
+      "lines": 99,
+      "sha256": "0951840de601ecf1f3a4a04dfdd4c85ac7eeb2b891c0358324e811e7609adb20"
+    },
+    {
+      "file": "test/enrollment_test.dart",
+      "lines": 23,
+      "sha256": "47fa94617ca4e335ab4d6357f570fb101f63c4a92b233644323cfb75369654cb"
+    },
+    {
+      "file": "test/widget_test.dart",
+      "lines": 33,
+      "sha256": "18e5c3551b415ddcb8b2a50efbdfbc1da0cd54110e0cea061a11dc231af77734"
+    },
+    {
+      "file": "pubspec.yaml",
+      "lines": 101,
+      "sha256": "dcaef2f30e9ac7a683b536abf8393caa1d999108d0dcb675f6bd9b2d7ac5552e"
+    },
+    {
+      "file": "analysis_options.yaml",
+      "lines": 28,
+      "sha256": "e0ea485cfdbc3e12b93efb8679a5ea73ebfe20ea4ca0c473dc594fc2fb274ed5"
+    },
+    {
+      "file": "config.example.json",
+      "lines": 4,
+      "sha256": "eaaba8aff190e979742f775aac070c6e3a4c47754e33682743549947c3016baf"
+    },
+    {
+      "file": "web/index.html",
+      "lines": 47,
+      "sha256": "576c860a22d697e624cd9ce27c3ba47553957f6159fcf430b1d2e6fc4925529a"
+    },
+    {
+      "file": "web/manifest.json",
+      "lines": 11,
+      "sha256": "3f66b68d0a943233cafb460499ed3997ecbcfc520ee7c056e5555dc4214ecf24"
+    },
+    {
+      "file": "web/favicon.svg",
+      "lines": 1,
+      "sha256": "631fea23089e17802a9a7e861457904a3199fb8c38d73516a673590aec2cd413"
+    },
+    {
+      "file": "web/_redirects",
+      "lines": 1,
+      "sha256": "6036983e5fc00f0169c9e939b1816ed771eee00e27f2fcc517b819041460b9ef"
+    },
+    {
+      "file": "firebase.json",
+      "lines": 7,
+      "sha256": "8025b19eb509bc868af8930f570df1251bb1db2a2d3f51f07ab3b95cccf0cab9"
+    },
+    {
+      "file": ".gitignore",
+      "lines": 48,
+      "sha256": "ae4509cfe87d34a219635edfc3cd2287c8d3d7bfab46da2d59e1a3f1b1139136"
+    },
+    {
+      "file": "tool/serve_web.py",
+      "lines": 24,
+      "sha256": "c1069311e794e40b567fcf5aa15a5fb6b433375c4843b8ea9d760a32b9549e68"
+    },
+    {
+      "file": "tool/check_supabase.mjs",
+      "lines": 31,
+      "sha256": "53b48e00857693fc24245629fa1a5e0f79ba65d52959084581a12504e4ba41c0"
+    }
+  ]
+}

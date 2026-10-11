@@ -1,0 +1,11 @@
+{
+  "name": "UNSA LAB · Matrícula de laboratorios",
+  "short_name": "UNSA LAB",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F7F5F2",
+  "theme_color": "#7B1835",
+  "description": "Laboratorios de Ingeniería de Sistemas · UNSA",
+  "prefer_related_applications": false,
+  "icons": [{"src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}
