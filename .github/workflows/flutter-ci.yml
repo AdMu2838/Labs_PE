@@ -1,0 +1,49 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: flutter-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Analizar y probar Flutter
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Instalar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.6'
+          channel: stable
+          cache: true
+
+      - name: Resolver dependencias del lockfile
+        run: flutter pub get --enforce-lockfile
+
+      - name: Análisis estático
+        run: flutter analyze --no-pub
+
+      # Solo usa pruebas locales con mocks; no modifica el Supabase real.
+      - name: Pruebas de widgets y lógica
+        run: flutter test --no-pub

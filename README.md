@@ -241,6 +241,16 @@ flutter build web --release --dart-define-from-file=config.json
 
 Publica `build/web` en un hosting estático con fallback SPA. Se incluyen `firebase.json` para Firebase Hosting y `web/_redirects` para Netlify. Configura también las URLs de Auth del dominio definitivo.
 
+### Vercel con integración nativa de GitHub
+
+Importa **AdMu2838/Labs_PE** en Vercel con el preset **Other**. `vercel.json` ejecuta `tool/build_vercel.sh`, instala Flutter y publica `build/web` con soporte para rutas SPA. Los pushes a `main` despliegan producción mediante la integración de Vercel.
+
+Configura únicamente `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` en las **Environment Variables de Vercel**. No necesitas tokens ni IDs de Vercel en GitHub. Después agrega el dominio publicado a las URLs de autenticación de Supabase.
+
+El workflow [`flutter-ci.yml`](.github/workflows/flutter-ci.yml) valida el código en GitHub sin secrets; la publicación la realiza Vercel.
+
+Pasos completos: [`docs/deploy_vercel.md`](docs/deploy_vercel.md).
+
 Para revisar una compilación local con soporte para rutas directas:
 
 ```powershell

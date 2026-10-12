@@ -1,0 +1,26 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "bash tool/build_vercel.sh",
+  "outputDirectory": "build/web",
+  "routes": [
+    {
+      "src": "/(?:index\\.html|flutter_bootstrap\\.js|flutter\\.js|main\\.dart\\.js|version\\.json|manifest\\.json)?$",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      },
+      "continue": true
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    }
+  ]
+}

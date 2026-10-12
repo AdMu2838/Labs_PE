@@ -35,6 +35,8 @@ migrate_working_dir/
 /config.json
 /.env
 /.playwright-mcp/
+/.vercel/
+/.flutter-sdk/
 
 # Symbolication related
 app.*.symbols
