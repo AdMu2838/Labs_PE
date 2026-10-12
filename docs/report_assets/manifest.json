@@ -2,8 +2,8 @@
   "output": "Informe_Laboratorio_4_UNSA_LAB.docx",
   "figures": 13,
   "web_screenshots": 12,
-  "source_files": 53,
-  "source_lines": 2583,
+  "source_files": 54,
+  "source_lines": 2610,
   "sources": [
     {
       "file": "lib/app/app.dart",
@@ -172,8 +172,8 @@
     },
     {
       "file": "lib/shared/widgets/ui.dart",
-      "lines": 67,
-      "sha256": "071a13f596e5b4bf9bc70e9c6988e27bb190e070ea0e819547446fb5933604db"
+      "lines": 69,
+      "sha256": "9c90d8e7809f1752f5d32d0ea5abc109c8c97732856d32c2e4301894304766db"
     },
     {
       "file": "supabase/migrations/001_schema.sql",
@@ -194,6 +194,11 @@
       "file": "supabase/migrations/004_google_onboarding.sql",
       "lines": 57,
       "sha256": "13e0ecb84ac3071241f82343551cb3a3be8e28d1c7469f7779893579a52fb576"
+    },
+    {
+      "file": "test/accessibility_test.dart",
+      "lines": 25,
+      "sha256": "b96d5a875ce06a6187c366133918ebbd2d704cb5dd52d4a5e9e8e855eba0f21d"
     },
     {
       "file": "test/admin_responsive_test.dart",

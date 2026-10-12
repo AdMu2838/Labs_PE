@@ -44,7 +44,7 @@ def main(template):
         assert config['SUPABASE_PUBLISHABLE_KEY'] not in plain_text, 'La clave real está incluida en el informe'
         comments = etree.fromstring(archive.read('word/comments.xml'))
         comment_count = len(comments)
-        assert comment_count == 5, 'Faltan comentarios de cambios'
+        assert comment_count == 6, 'Faltan comentarios de cambios'
         embedded = {hashlib.sha256(archive.read(name)).hexdigest() for name in archive.namelist() if name.startswith('word/media/')}
         for name in original.namelist():
             if name.startswith('word/media/'):

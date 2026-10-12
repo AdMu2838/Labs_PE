@@ -1,5 +1,7 @@
 # Verificación del proyecto Supabase
 
+Actualización posterior: [pruebas E2E con tres cuentas persistentes](e2e_roles.md), 45 comprobaciones y 12 pruebas locales aprobadas. Las cuentas de esta nueva etapa permanecen disponibles; se distinguen de los usuarios temporales de la validación inicial descrita a continuación.
+
 Fecha: 11 de octubre de 2026.
 
 Proyecto: **MatriculasLab**, referencia `spduupvhofygzkcmqmiz`.

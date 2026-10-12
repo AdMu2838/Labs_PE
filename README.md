@@ -4,6 +4,8 @@ Sistema de matrícula de laboratorios para Ingeniería de Sistemas de la Univers
 
 Estado de las migraciones y pruebas del proyecto configurado: [`docs/verification_supabase.md`](docs/verification_supabase.md).
 
+Pruebas end-to-end con las tres cuentas persistentes y oferta de ejemplo: [`docs/e2e_roles.md`](docs/e2e_roles.md). Las credenciales se conservan localmente en `.dart_tool/test_accounts.json` y no forman parte del repositorio.
+
 ## Informe de laboratorio 4
 
 Documento editable con la plantilla institucional, capturas web de escritorio, explicación de widgets, comentarios de cambios y código completo:

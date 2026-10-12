@@ -35,7 +35,9 @@ class Panel extends StatelessWidget {
   final Widget child;
   final double padding;
   @override
-  Widget build(BuildContext context) => Card(margin: EdgeInsets.zero, child: Padding(padding: EdgeInsets.all(padding), child: child));
+  // Cada campo conserva su propio nodo accesible, incluso dentro de una tarjeta.
+  Widget build(BuildContext context) => Semantics(container: true, explicitChildNodes: true,
+    child: Card(semanticContainer: false, margin: EdgeInsets.zero, child: Padding(padding: EdgeInsets.all(padding), child: child)));
 }
 
 class StatusChip extends StatelessWidget {
