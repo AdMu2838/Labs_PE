@@ -15,7 +15,7 @@ class NotificationsPage extends ConsumerWidget {
         const SizedBox(height: 10), Text(r['body']),
         if (r['is_read'] != true) TextButton(onPressed: () async {
           try { await ref.read(labRepositoryProvider).markRead(r['id']); ref.read(revisionProvider.notifier).refresh(); }
-          catch (e) { if (context.mounted) notify(context, '$e'); }
+          catch (e) { if (context.mounted) notify(context, errorLabel(e)); }
         }, child: const Text('Marcar como leída')),
       ]))),
     ])),

@@ -18,7 +18,7 @@ class _EnrollmentsPageState extends ConsumerState<EnrollmentsPage> {
   Future<void> _action(Future<void> Function() operation) async {
     setState(() => _busy = true);
     try { await operation(); ref.read(revisionProvider.notifier).refresh(); if (mounted) notify(context, 'Operación completada.'); }
-    catch (e) { if (mounted) notify(context, '$e'); }
+    catch (e) { if (mounted) notify(context, errorLabel(e)); }
     finally { if (mounted) setState(() => _busy = false); }
   }
   Future<void> _change(String id, LabGroup group, List<LabGroup> groups) async {
@@ -34,8 +34,10 @@ class _EnrollmentsPageState extends ConsumerState<EnrollmentsPage> {
     final user = ref.watch(sessionProvider).asData?.value;
     final groups = ref.watch(groupsProvider).asData?.value ?? [];
     final student = user?.role.name == 'student';
+    final teacher = user?.role.name == 'teacher';
+    final assignedIds = groups.where((g) => g.teacherId == user?.id).map((g) => g.id).toSet();
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      PageHeading(student ? 'Mis matrículas' : 'Matrículas y grupos', 'Consulta los registros y sus estados.', action: student ? OutlinedButton.icon(onPressed: _busy ? null : () async {
+      PageHeading(student ? 'Mis matrículas' : teacher ? 'Mis grupos' : 'Matrículas y grupos', teacher ? 'Consulta tus grupos asignados y sus estudiantes.' : 'Consulta los registros y sus estados.', action: student ? OutlinedButton.icon(onPressed: _busy ? null : () async {
         try {
           final rows = await ref.read(recordsProvider('enrollments').future);
           final active = rows.where((r) => r['status'] == 'active' && r['student_id'] == user!.id);
@@ -43,7 +45,7 @@ class _EnrollmentsPageState extends ConsumerState<EnrollmentsPage> {
           for (final r in active) { final g = groups.where((g) => g.id == r['group_id']).firstOrNull; if (g != null) output.add([g.period, g.course, g.name, g.sessions.map((s) => s.label).join('\n')]); }
           if (output.isEmpty) { if (context.mounted) notify(context, 'No tienes matrículas activas para exportar.'); return; }
           await DocumentService.certificate(user!.name, user.cui, output);
-        } catch (e) { if (context.mounted) notify(context, '$e'); }
+        } catch (e) { if (context.mounted) notify(context, errorLabel(e)); }
       }, icon: const Icon(Icons.download_outlined), label: const Text('Constancia PDF')) : null),
       if (user?.role.name == 'teacher') ...[
         Text('Mis grupos asignados', style: Theme.of(context).textTheme.titleLarge), const SizedBox(height: 16),
@@ -53,7 +55,7 @@ class _EnrollmentsPageState extends ConsumerState<EnrollmentsPage> {
         ]))), const SizedBox(height: 18),
       ],
       RecordsView('enrollments', builder: (rows) {
-        final visible = student ? rows.where((r) => r['student_id'] == user!.id).toList() : rows;
+        final visible = rows.where((r) => student ? r['student_id'] == user!.id : !teacher || assignedIds.contains(r['group_id'])).toList();
         if (visible.isEmpty) return EmptyState(student ? 'Aún no tienes matrículas. Explora los laboratorios para comenzar.' : 'No hay matrículas en tus grupos.');
         return Column(children: [for (final row in visible.reversed) Padding(padding: const EdgeInsets.only(bottom: 14), child: Builder(builder: (context) {
           final g = groups.where((g) => g.id == row['group_id']).firstOrNull;
@@ -70,7 +72,7 @@ class _EnrollmentsPageState extends ConsumerState<EnrollmentsPage> {
         }))]);
       }), const SizedBox(height: 24), Text('Lista de espera', style: Theme.of(context).textTheme.titleLarge), const SizedBox(height: 16),
       RecordsView('waitlist', builder: (rows) {
-        final visible = rows.where((r) => r['status'] == 'waiting' && (!student || r['student_id'] == user!.id)).toList()..sort((a, b) => '${a['created_at']}'.compareTo('${b['created_at']}'));
+        final visible = rows.where((r) => r['status'] == 'waiting' && (student ? r['student_id'] == user!.id : !teacher || assignedIds.contains(r['group_id']))).toList()..sort((a, b) => '${a['created_at']}'.compareTo('${b['created_at']}'));
         if (visible.isEmpty) return const EmptyState('No hay registros pendientes en lista de espera.');
         return Column(children: [for (final r in visible) Padding(padding: const EdgeInsets.only(bottom: 12), child: Panel(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(groups.where((g) => g.id == r['group_id']).firstOrNull?.course ?? 'Grupo'), Text('Registrado: ${r['created_at'].toString().substring(0, 10)}'),

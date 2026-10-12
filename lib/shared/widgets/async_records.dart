@@ -12,7 +12,7 @@ class RecordsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => ref.watch(recordsProvider(table)).when(
     data: builder,
     loading: () => const Center(child: Padding(padding: EdgeInsets.all(32), child: CircularProgressIndicator())),
-    error: (e, _) => Panel(child: Column(children: [Text('No se pudo cargar la información: $e'),
+    error: (e, _) => Panel(child: Column(children: [Text('No se pudo cargar la información: ${errorLabel(e)}'),
       TextButton(onPressed: () => ref.invalidate(recordsProvider(table)), child: const Text('Reintentar'))])),
   );
 }

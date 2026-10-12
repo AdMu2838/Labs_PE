@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../features/auth/presentation/auth_controller.dart';
@@ -36,7 +37,7 @@ final routerProvider = Provider<GoRouter>((ref) {
     }, routes: [
       GoRoute(path: '/login', builder: (_, _) => const LoginPage()),
       GoRoute(path: '/password', builder: (_, _) => const LoginPage(passwordRecovery: true)),
-      ShellRoute(builder: (_, state, child) => AppShell(path: state.uri.path, child: child), routes: [
+      ShellRoute(builder: (_, state, child) => AppShell(path: state.uri.toString(), child: child), routes: [
         GoRoute(path: '/', builder: (_, _) => const PageBody(child: DashboardPage())),
         GoRoute(path: '/catalog', builder: (_, _) => const PageBody(child: CatalogPage())),
         GoRoute(path: '/enrollments', builder: (_, _) => const PageBody(child: EnrollmentsPage())),
@@ -45,7 +46,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         GoRoute(path: '/requests', builder: (_, _) => const PageBody(child: RequestsPage())),
         GoRoute(path: '/notifications', builder: (_, _) => const PageBody(child: NotificationsPage())),
         GoRoute(path: '/profile', builder: (_, _) => const PageBody(child: ProfilePage())),
-        GoRoute(path: '/admin', builder: (_, _) => const PageBody(child: AdminPage())),
+        GoRoute(path: '/admin', builder: (_, state) => PageBody(child: AdminPage(key: ValueKey(state.uri.toString()), section: state.uri.queryParameters['section']))),
         GoRoute(path: '/reports', builder: (_, _) => const PageBody(child: ReportsPage())),
       ]),
     ], errorBuilder: (context, state) => Scaffold(body: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [const Text('Página no encontrada'), TextButton(onPressed: () => context.go('/'), child: const Text('Volver al inicio'))]))));
@@ -58,5 +59,8 @@ class LabApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) => MaterialApp.router(
     title: 'UNSA · LAB | Matrícula de laboratorios', debugShowCheckedModeBanner: false,
+    locale: const Locale('es', 'PE'),
+    supportedLocales: const [Locale('es', 'PE')],
+    localizationsDelegates: GlobalMaterialLocalizations.delegates,
     theme: buildTheme(), routerConfig: ref.watch(routerProvider));
 }

@@ -26,7 +26,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     } catch (e) {
       if (mounted) {
         setState(() => _error = e.toString().contains('not enabled')
-          ? 'El acceso con Google todavía no está habilitado en Supabase.' : e.toString());
+          ? 'El acceso con Google todavía no está habilitado en Supabase.' : errorLabel(e));
       }
     } finally {
       if (mounted) setState(() => _busy = false);
@@ -46,7 +46,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         await repo.signUp(_email.text.trim(), _password.text, _name.text.trim(), _cui.text.trim());
         _message = 'Cuenta creada. Revisa tu correo para confirmar el registro.';
       } else { await repo.signIn(_email.text.trim(), _password.text); }
-    } catch (e) { _error = e.toString(); }
+    } catch (e) { _error = errorLabel(e); }
     finally { if (mounted) setState(() => _busy = false); }
   }
   @override
@@ -62,9 +62,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         if (ref.watch(authRepositoryProvider) == null) ...[
           const Panel(child: Text('Modo demostración\nExplora la plataforma con datos ficticios. Para usar cuentas reales, configura las credenciales de Supabase.')),
           const SizedBox(height: 20),
-          for (final role in [AppRole.student, AppRole.admin, AppRole.teacher]) Padding(padding: const EdgeInsets.only(bottom: 12), child: SizedBox(width: double.infinity,
+          for (final role in AppRole.values) Padding(padding: const EdgeInsets.only(bottom: 12), child: SizedBox(width: double.infinity,
             child: FilledButton.tonalIcon(onPressed: () => ref.read(demoSessionProvider.notifier).enter(role), icon: Icon(role == AppRole.student ? Icons.school_outlined : role == AppRole.admin ? Icons.admin_panel_settings_outlined : Icons.person_outline),
-              label: Text('Explorar como ${role == AppRole.student ? 'estudiante' : role == AppRole.admin ? 'administrador' : 'docente'}')))),
+              label: Text('Explorar como ${presentationLabel(role.name).toLowerCase()}')))),
          ] else Form(key: _form, child: Column(children: [
           if (!widget.passwordRecovery) ...[
             SizedBox(width: double.infinity, child: OutlinedButton.icon(

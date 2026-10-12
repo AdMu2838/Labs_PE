@@ -35,12 +35,12 @@ class _ImportPanelState extends ConsumerState<ImportPanel> {
         rows.add({for (var i = 0; i < headers.length; i++) headers[i]: '${line[i]}'.trim()});
       }
       setState(() { _preview = rows; _error = null; });
-    } catch (e) { setState(() => _error = '$e'); }
+    } catch (e) { setState(() => _error = errorLabel(e)); }
   }
   Future<void> _import() async {
     setState(() => _busy = true);
     try { await ref.read(labRepositoryProvider).importAcademic(_preview, _kind); ref.read(revisionProvider.notifier).refresh(); if (mounted) { notify(context, 'Importación completada: ${_preview.length} registros.'); setState(() => _preview = []); } }
-    catch (e) { if (mounted) setState(() => _error = '$e'); }
+    catch (e) { if (mounted) setState(() => _error = errorLabel(e)); }
     finally { if (mounted) setState(() => _busy = false); }
   }
   @override

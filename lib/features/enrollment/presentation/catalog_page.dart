@@ -25,7 +25,7 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
       final result = await ref.read(labRepositoryProvider).enroll(group.id, waitlist: waiting);
       ref.read(revisionProvider.notifier).refresh();
       if (mounted) notify(context, result == 'waiting' ? 'Te registraste en la lista de espera.' : '¡Matrícula confirmada! Consulta tu horario.');
-    } catch (e) { if (mounted) notify(context, e.toString()); }
+    } catch (e) { if (mounted) notify(context, errorLabel(e)); }
     finally { if (mounted) setState(() => _busy = null); }
   }
   @override
@@ -39,7 +39,7 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
         SizedBox(width: c.maxWidth < 400 ? c.maxWidth : 220, child: DropdownButtonFormField<String>(isExpanded: true, initialValue: _period, decoration: const InputDecoration(labelText: 'Periodo'), items: [const DropdownMenuItem(value: null, child: Text('Todos')), for (final p in ref.watch(recordsProvider('periods')).asData?.value ?? []) DropdownMenuItem(value: p['id'] as String, child: Text(p['name'], overflow: TextOverflow.ellipsis))], onChanged: (v) => setState(() => _period = v))),
         FilterChip(label: const Text('Solo con vacantes'), selected: _onlyAvailable, onSelected: (v) => setState(() => _onlyAvailable = v)),
       ]))), const SizedBox(height: 24),
-      ref.watch(groupsProvider).when(loading: () => const Center(child: CircularProgressIndicator()), error: (e, _) => EmptyState('No se pudo cargar el catálogo: $e'), data: (groups) {
+      ref.watch(groupsProvider).when(loading: () => const Center(child: CircularProgressIndicator()), error: (e, _) => EmptyState('No se pudo cargar el catálogo: ${errorLabel(e)}'), data: (groups) {
         final filtered = groups.where((g) => '${g.course} ${g.code} ${g.teacher}'.toLowerCase().contains(_query) && (_semester == null || g.semester == _semester) && (_period == null || g.periodId == _period) && (!_onlyAvailable || g.available > 0)).toList();
         if (filtered.isEmpty) return const EmptyState('No hay grupos que coincidan con tu búsqueda.', icon: Icons.search_off);
         return LayoutBuilder(builder: (context, c) {

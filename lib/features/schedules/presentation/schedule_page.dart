@@ -14,11 +14,11 @@ class SchedulePage extends ConsumerWidget {
     final groups = ref.watch(groupsProvider).asData?.value ?? [];
     final user = ref.watch(sessionProvider).asData?.value;
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const PageHeading('Mi horario', 'Todos tus laboratorios, organizados por día.'),
+      PageHeading(user?.role.name == 'teacher' ? 'Horario docente' : user?.manages == true ? 'Horario de laboratorios' : 'Mi horario', 'Laboratorios organizados por día.'),
       RecordsView('enrollments', builder: (rows) {
         final ids = rows.where((r) => r['status'] == 'active' && (user?.role.name != 'student' || r['student_id'] == user!.id)).map((r) => r['group_id']).toSet();
         final enrolled = groups.where((g) => user?.role.name == 'teacher' ? g.teacherId == user?.id : ids.contains(g.id)).toList();
-        if (enrolled.isEmpty) return const EmptyState('Tu horario está vacío. Se actualizará al confirmar tus matrículas.', icon: Icons.calendar_month_outlined);
+        if (enrolled.isEmpty) return EmptyState(user?.role.name == 'student' ? 'Tu horario está vacío. Se actualizará al confirmar tus matrículas.' : 'No hay sesiones de laboratorio para mostrar.', icon: Icons.calendar_month_outlined);
         return LayoutBuilder(builder: (context, c) {
           final columns = c.maxWidth > 1050 ? 5 : c.maxWidth > 650 ? 3 : c.maxWidth > 450 ? 2 : 1;
           return Wrap(spacing: 12, runSpacing: 12, children: [for (var day = 1; day <= 7; day++) if (day <= 5 || enrolled.any((g) => g.sessions.any((s) => s.day == day))) SizedBox(width: (c.maxWidth - 12 * (columns - 1)) / columns,

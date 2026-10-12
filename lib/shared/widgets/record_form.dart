@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/domain/lab_repository.dart';
 import '../../core/data/providers.dart';
 import '../../core/domain/form_field_spec.dart';
+import '../presentation_labels.dart';
 export '../../core/domain/form_field_spec.dart';
 
 Future<bool> editRecord(BuildContext context, String table, String title, List<FormFieldSpec> fields, {Record? initial}) async =>
@@ -52,19 +53,19 @@ class _RecordFormState extends ConsumerState<RecordForm> {
       await ref.read(labRepositoryProvider).save(widget.table, row);
       ref.read(revisionProvider.notifier).refresh();
       if (mounted) Navigator.pop(context, true);
-    } catch (e) { if (mounted) setState(() { _error = '$e'; _busy = false; }); }
+    } catch (e) { if (mounted) setState(() { _error = errorLabel(e); _busy = false; }); }
   }
   Widget _field(FormFieldSpec f) {
     if (f.kind == 'bool') return SwitchListTile(contentPadding: EdgeInsets.zero, title: Text(f.label), value: _values[f.key] == true, onChanged: _busy ? null : (v) => setState(() => _values[f.key] = v));
     if (f.table != null) {
       final options = ref.watch(recordsProvider(f.table!));
-      return options.when(loading: () => const LinearProgressIndicator(), error: (e, _) => Text('Error al cargar ${f.label}: $e'), data: (rows) {
+      return options.when(loading: () => const LinearProgressIndicator(), error: (e, _) => Text('Error al cargar ${f.label}: ${errorLabel(e)}'), data: (rows) {
         final filtered = rows.where((r) => f.key == 'teacher_id' ? r['role'] == 'teacher' && r['active'] == true : f.key == 'student_id' ? r['role'] == 'student' : true);
         final entries = filtered.map((r) => (r['id'].toString(), '${r[f.optionLabel]}')).toList();
         return _dropdown(f, entries);
       });
     }
-    if (f.options != null) return _dropdown(f, f.options!.map((v) => (v, v)).toList());
+    if (f.options != null) return _dropdown(f, f.options!.map((v) => (v, presentationLabel(v))).toList());
     return TextFormField(controller: _controllers[f.key], enabled: !_busy, maxLines: f.kind == 'long' ? 3 : 1,
       decoration: InputDecoration(labelText: f.label, helperText: f.kind == 'date' ? 'AAAA-MM-DD HH:MM (hora local)' : f.kind == 'time' ? 'HH:MM, formato de 24 horas' : null),
       keyboardType: f.kind == 'int' || f.kind == 'number' ? TextInputType.number : TextInputType.text,

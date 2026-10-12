@@ -23,7 +23,7 @@ class _RequestsPageState extends ConsumerState<RequestsPage> {
     if (response == null) return;
     setState(() => _busy = true);
     try { await ref.read(labRepositoryProvider).resolveRequest(id, status, response); ref.read(revisionProvider.notifier).refresh(); }
-    catch (e) { if (mounted) notify(context, '$e'); }
+    catch (e) { if (mounted) notify(context, errorLabel(e)); }
     finally { if (mounted) setState(() => _busy = false); }
   }
   @override
